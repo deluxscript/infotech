@@ -19,7 +19,7 @@ body {
 	font-size: 42px;
 }
 
-input {
+input[type="text"] {
 	height: 50px;
     line-height: 50px;
     color: #333;
@@ -33,7 +33,7 @@ input {
     border: none;
 }
 
-input:focus {
+input[type="text"]:focus {
 	box-shadow: none;
     border: none;
     outline: none;
