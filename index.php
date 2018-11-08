@@ -20,9 +20,9 @@
 				<h2 class="title">InfoTech Game</h2>
 			</div>
 			<div class="formfield">
-				<form action="" method="">
-					<input type="text" id="userID" name="userID" placeholder="Enter your UserID" />
-					<button type="submit">Enter</button>
+				<form action="/index.php" method="POST">
+					<input type="text" id="username" name="username" placeholder="Enter your uniqueusername" />
+					<input class="btn" type="submit" name="submit" value="Enter" />
 				</form>
 			</div>
 		</div>
