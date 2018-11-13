@@ -4,12 +4,11 @@ include 'connect.php';
 
 	class KahootUser {
 		private $db;
-			// public $user;
+		
 		public function __construct(){
-			$this->db = new connection(); //creating an instance of class connection after including the file on connect.php storing it in $db variable  using thgis keyword
-			$this->db = $this->db->connect(); // using the function of class connection after storing connection in $db
-
-		}//end of constructor
+			$this->db = new connection(); 
+			$this->db = $this->db->connect();
+		}
 
 		public function signUp($username) {
 
@@ -19,12 +18,30 @@ include 'connect.php';
 			$sql->execute();
 			//validate username exist
 			if ($sql->rowCount() > 0) {
-				$response =  $sql->fetch(PDO::FETCH_ASSOC);
+				//user already exist!
+				$_SESSION['user_exist'] = "User named : ".$username." already exist! please choose another username";
+				//kindly pass $_SESSION['user_exist'] in a beautiful front end alert notification
+				//to notify user that the username already exist.
 			}else{
-				header('Loacation: index.php');
-			} //end of password validation
+				
+				try {
+					//create user if none corresponding username exist
+					$user = $this->db->prepare("INSERT INTO `users` (`username`, `created_at`) VALUES (?,?)");
+					//login user 
+					$now = date('Y/m/d H:i:s');
+					$user->bindParam(1,$username);
+					$user->bindParam(2, $now);
+					$user->execute();
 
-		} //end of sign_up function
+					$_SESSION['user'] = $user;
+					// $_SESSION['user'] can now be used in other pages in the entire app
+					//like the quize page and scores page;
+				} catch (PDOException $e) {
+					$this->dd($e->getMessage());
+				}
+			}
+
+		}
 
 		public function dd($variable){
 			return var_dump($variable); exit;
