@@ -1,3 +1,16 @@
+<?php 
+	include 'classes/userController.php';
+
+	// create user
+	if (isset($_POST['create_user']  )) {
+	
+		$user_name = $_POST['username'];
+
+		$user = new KahootUser();
+
+		$user->signUp($user_name);
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +34,8 @@
 			</div>
 			<div class="formfield">
 				<form action="/index.php" method="POST">
-					<input type="text" id="username" name="username" placeholder="Enter your uniqueusername" />
-					<input class="btn" type="submit" name="submit" value="Enter" />
+					<input type="text" id="username" name="username" placeholder="Enter your unique username" />
+					<input class="btn" type="submit" name="create_user" value="Enter" />
 				</form>
 			</div>
 		</div>
